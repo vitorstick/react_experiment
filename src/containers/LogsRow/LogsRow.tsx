@@ -24,7 +24,7 @@ const LogsRow: React.FC<Props> = (props) => {
     return (
         <div className="logs-row">
             <div className="logs-row__header">{status}</div>
-            <div>
+            <div className="logs-row__list">
                 {logs?.map((log: ILog): ReactElement => {
                     return (
                         <div className="log__item" key={log.id}>

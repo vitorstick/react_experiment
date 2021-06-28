@@ -1,7 +1,6 @@
 .logs-row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
 
     &__header {
         font-weight: bold;
