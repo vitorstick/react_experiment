@@ -1,7 +1,4 @@
-.schedules__container {
+.logs {
     display: flex;
-    flex-direction: column;
-}
-.schedules__item {
-    margin-bottom: 16px;
+    justify-content: space-around;
 }

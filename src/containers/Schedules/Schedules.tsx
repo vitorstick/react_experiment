@@ -2,6 +2,7 @@ import React, {Fragment, ReactElement, useEffect, useState} from 'react';
 import ScheduleItem from '../ScheduleItem/ScheduleItem';
 import {ISchedule} from '../../da/schedule.interface';
 import './styles.scss';
+import Logs from '../Logs/Logs';
 
 const Schedules: React.FC = () => {
     const [items, setItems] = useState([]);
@@ -79,7 +80,9 @@ const Schedules: React.FC = () => {
                     );
                 })}
             </div>
-            <div className="logs__container"></div>
+            <div className="logs__container">
+                <Logs logs={logs} />
+            </div>
         </div>
     );
 };

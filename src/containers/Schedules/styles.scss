@@ -1,7 +1,17 @@
-.schedules__container {
+.schedules {
     display: flex;
-    flex-direction: column;
-}
-.schedules__item {
-    margin-bottom: 16px;
+    flex-direction: row;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item {
+        margin-bottom: 16px;
+    }
+
+    .logs__container {
+        width: 100%;
+    }
 }

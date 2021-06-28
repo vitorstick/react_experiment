@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ISchedule} from '../../da/schedule.interface';
 import Schedule from '../../components/Schedule/Schedule';
 

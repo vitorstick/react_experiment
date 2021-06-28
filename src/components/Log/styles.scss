@@ -1,0 +1,9 @@
+.log-detail {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+}

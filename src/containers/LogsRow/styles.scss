@@ -1,0 +1,9 @@
+.logs-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &__header {
+        font-weight: bold;
+    }
+}
