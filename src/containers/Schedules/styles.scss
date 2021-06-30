@@ -1,9 +1,6 @@
-@import '../../styles/variables';
-
 .schedules {
     display: flex;
     flex-direction: row;
-    color: $main_color;
 
     &__container {
         display: flex;

@@ -6,7 +6,9 @@
     "scripts": {
         "start": "webpack-cli serve --mode=development --env development --open --hot",
         "build": "webpack --mode=production --env production --progress",
-        "lint": "eslint src/**/*.{ts,tsx} --quiet --fix"
+        "lint": "eslint src/**/*.{ts,tsx} --quiet --fix",
+        "test": "jest",
+        "test:watch": "jest --watch"
     },
     "devDependencies": {
         "@types/react": "^17.0.3",
@@ -36,9 +38,17 @@
         "webpack-dev-server": "^3.11.2"
     },
     "dependencies": {
+        "@types/enzyme": "^3.10.8",
+        "@types/jest": "^26.0.23",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.6",
+        "enzyme-to-json": "^3.6.2",
+        "identity-obj-proxy": "^3.0.0",
+        "jest": "^27.0.6",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "recoil": "^0.3.1",
-        "sass-loader": "^12.1.0"
+        "sass-loader": "^12.1.0",
+        "ts-jest": "^27.0.3"
     }
 }
