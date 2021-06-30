@@ -6,11 +6,16 @@ interface Props {
     schedule: ISchedule;
     onScheduleRetire: (isRetired: boolean) => void;
     onSelectSchedule: (schedule: ISchedule) => void;
+    onRemoveSchedule: (schedule: ISchedule) => void;
 }
 
 const Schedule: React.FC<Props> = (props) => {
     const retireItem = (): void => {
         props.onScheduleRetire(true);
+    };
+
+    const removeItem = (): void => {
+        props.onRemoveSchedule(props.schedule);
     };
 
     const selectItem = (): void => {
@@ -20,7 +25,12 @@ const Schedule: React.FC<Props> = (props) => {
     return (
         <div className="schedule-detail" onClick={() => selectItem()}>
             <div className="schedule-detail__header">
-                <button></button>
+                <button
+                    className="schedule-detail__retire-button"
+                    disabled={props.schedule.isRetired}
+                    onClick={() => removeItem()}>
+                    x
+                </button>
                 <h4>{props.schedule.name}</h4>
             </div>
             <div className="schedule-detail__header">

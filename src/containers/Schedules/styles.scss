@@ -1,10 +1,17 @@
+@import '../../styles/variables';
+
 .schedules {
     display: flex;
     flex-direction: row;
+    color: $main_color;
 
     &__container {
         display: flex;
         flex-direction: column;
+        padding: 0 8px;
+        max-height: 85vh;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
     }
 
     &__item {

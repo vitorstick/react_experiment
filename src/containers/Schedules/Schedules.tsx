@@ -1,6 +1,7 @@
 import React, {Fragment, ReactElement, useEffect, useState} from 'react';
 import ScheduleItem from '../ScheduleItem/ScheduleItem';
 import {ISchedule} from '../../da/schedule.interface';
+import {CONFIG} from '../../config/config';
 import './styles.scss';
 import Logs from '../Logs/Logs';
 
@@ -10,6 +11,7 @@ const Schedules: React.FC = () => {
     const [error, setError] = useState(null);
     const [loading, setIsLoading] = useState(true);
     const [editing, setEditing] = useState(false);
+    const [removing, setRemoving] = useState(false);
 
     const updateItem = (id: number, updatedItem: ISchedule) => {
         console.log('updateItem');
@@ -17,8 +19,16 @@ const Schedules: React.FC = () => {
 
         setItems(items.map((item) => (item.id === id ? updatedItem : item)));
     };
+
+    const removeItem = (id: number, removedItem: ISchedule) => {
+        console.log('removeItem');
+        setRemoving(false);
+
+        setItems(items.filter((item) => item.id !== id));
+    };
+
     const selectItem = (schedule: ISchedule) => {
-        fetch(`http://localhost:3000/scheduleLogs?scheduleId=${schedule.id}`)
+        fetch(`${CONFIG.URL.SCHEDULE_LOGS}?scheduleId=${schedule.id}`)
             .then((res) => {
                 return res.json();
             })
@@ -35,7 +45,7 @@ const Schedules: React.FC = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:3000/schedules')
+        fetch(`${CONFIG.URL.SCHEDULES}`)
             .then((res) => {
                 return res.json();
             })
@@ -73,6 +83,7 @@ const Schedules: React.FC = () => {
                                         schedule={item}
                                         onScheduleRetire={updateItem}
                                         onSelectSchedule={selectItem}
+                                        onRemoveSchedule={removeItem}
                                     />
                                 </Fragment>
                             )}

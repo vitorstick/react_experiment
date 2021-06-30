@@ -1,10 +1,19 @@
+@import '../../styles/variables';
+
 .schedule-detail {
     display: flex;
     flex-direction: column;
+    border: 1px solid $main_color;
+    padding: 8px;
+    border-radius: 4px;
 
     &__header {
         display: flex;
         align-items: center;
+        h4 {
+            margin: 8px 0px;
+            font-size: 14px;
+        }
 
         button {
             margin-right: 8px;
