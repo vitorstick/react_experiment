@@ -5,7 +5,7 @@ export interface ISchedule {
     endDate: string;
     endPoint: string;
     id: number;
-    intervalType: string;
+    intervalType?: string;
     isRetired: boolean;
     name: string;
     startDate: string;

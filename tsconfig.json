@@ -8,6 +8,7 @@
     "jsx": "react",
     "allowJs": true,
     "baseUrl": "src",
+    "outDir": "build",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,

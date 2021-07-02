@@ -14,17 +14,17 @@ const Schedules: React.FC = () => {
     const [removing, setRemoving] = useState(false);
 
     const updateItem = (id: number, updatedItem: ISchedule) => {
-        console.log('updateItem');
-        setEditing(false);
+        setEditing(true);
 
         setItems(items.map((item) => (item.id === id ? updatedItem : item)));
+        setEditing(false);
     };
 
     const removeItem = (id: number, removedItem: ISchedule) => {
-        console.log('removeItem');
-        setRemoving(false);
+        setRemoving(true);
 
         setItems(items.filter((item) => item.id !== id));
+        setRemoving(false);
     };
 
     const selectItem = (schedule: ISchedule) => {
@@ -54,15 +54,13 @@ const Schedules: React.FC = () => {
                     setItems(result);
                 },
                 (error) => {
+                    console.log('error :: ', error);
                     setError(error);
                 },
             )
             .finally(() => setIsLoading(false));
     }, []);
 
-    if (loading) {
-        return <h2>Loading</h2>;
-    }
     if (error) {
         return <h2>Error</h2>;
     }
@@ -73,9 +71,11 @@ const Schedules: React.FC = () => {
                 {items?.map((item: ISchedule): ReactElement => {
                     return (
                         <div className="schedules__item" key={item.id}>
-                            {editing ? (
+                            {editing || removing || loading ? (
                                 <Fragment>
-                                    <div>Editing</div>
+                                    <div className="schedules__loading">
+                                        Loading
+                                    </div>
                                 </Fragment>
                             ) : (
                                 <Fragment>

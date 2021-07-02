@@ -1,6 +1,6 @@
 module.exports = {
     roots: ['<rootDir>/src'],
-    transform: {'^.+\\.tsx?$': 'ts-jest'},
+    transform: { '^.+\\.tsx?$': 'ts-jest' },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     moduleNameMapper: {
@@ -8,4 +8,5 @@ module.exports = {
     },
     snapshotSerializers: ['enzyme-to-json/serializer'],
     setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
+    testEnvironment: 'jsdom',
 };

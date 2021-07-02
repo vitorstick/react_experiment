@@ -4,9 +4,9 @@ import Schedule from '../../components/Schedule/Schedule';
 
 interface Props {
     schedule: ISchedule;
-    onScheduleRetire: (id: number, updatedUser: ISchedule) => void;
-    onSelectSchedule: (schedule: ISchedule) => void;
-    onRemoveSchedule: (id: number, updatedUser: ISchedule) => void;
+    onScheduleRetire?: (id: number, updatedUser: ISchedule) => void;
+    onSelectSchedule?: (schedule: ISchedule) => void;
+    onRemoveSchedule?: (id: number, updatedUser: ISchedule) => void;
 }
 
 const ScheduleItem: React.FC<Props> = (props) => {
