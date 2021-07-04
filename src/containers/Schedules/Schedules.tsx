@@ -29,51 +29,60 @@ const Schedules: React.FC = () => {
 
     const selectItem = (schedule: ISchedule) => {
         fetch(`${CONFIG.URL.SCHEDULE_LOGS}?scheduleId=${schedule.id}`)
-            .then((res) => {
+            ?.then((res) => {
                 return res.json();
             })
-            .then(
+            ?.then(
                 (result: ISchedule[]) => {
-                    console.log('logs :: ', result);
+                    // console.log('logs :: ', result);
                     setLogs(result);
                 },
                 (error) => {
                     setError(error);
                 },
             )
-            .finally(() => setIsLoading(false));
+            ?.finally(() => setIsLoading(false));
     };
 
     useEffect(() => {
         fetch(`${CONFIG.URL.SCHEDULES}`)
-            .then((res) => {
+            ?.then((res) => {
                 return res.json();
             })
-            .then(
+            ?.then(
                 (result: ISchedule[]) => {
+                    // console.log('items :: ', result);
                     setItems(result);
                 },
                 (error) => {
-                    console.log('error :: ', error);
+                    // console.log('error :: ', error);
                     setError(error);
                 },
             )
-            .finally(() => setIsLoading(false));
+            ?.finally(() => {
+                // console.log('setIsLoading ');
+                setIsLoading(false);
+            });
     }, []);
 
     if (error) {
-        return <h2>Error</h2>;
+        return <div className="schedules__error">Error</div>;
     }
 
     return (
         <div className="schedules">
-            <div className="schedules__container">
+            <div className="schedules__container" data-testid="schedules-list">
                 {items?.map((item: ISchedule): ReactElement => {
                     return (
-                        <div className="schedules__item" key={item.id}>
+                        <div
+                            className="schedules__item"
+                            data-testid="schedules-item"
+                            key={item.id}>
                             {editing || removing || loading ? (
                                 <Fragment>
-                                    <div className="schedules__loading">
+                                    <div
+                                        className="schedules__loading"
+                                        data-testid="schedules-loading">
                                         Loading
                                     </div>
                                 </Fragment>

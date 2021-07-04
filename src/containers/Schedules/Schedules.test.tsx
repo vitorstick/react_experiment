@@ -1,46 +1,58 @@
-import React from 'react';
-import 'jsdom-global/register';
+import React, {useState as useStateMock} from 'react';
 import fetchMock from 'jest-fetch-mock';
-import {mount, ReactWrapper, shallow} from 'enzyme';
+import {shallow} from 'enzyme';
 import Schedules from './Schedules';
-import ScheduleItem from '../ScheduleItem/ScheduleItem';
-import fetch from 'node-fetch';
-import {CONFIG} from '../../config/config';
-import {act} from 'react-dom/test-utils';
-import {render, unmountComponentAtNode} from 'react-dom';
+import {unmountComponentAtNode} from 'react-dom';
+import {waitFor, render} from '@testing-library/react';
 import {TestsMockHelper} from '../../tests_helper/tests_helper';
 import {ISchedule} from '../../da/schedule.interface';
 
 describe('<Schedules />', () => {
-    let component;
+    let container = null;
     const schedules: ISchedule[] = TestsMockHelper.getSchedules();
+    fetchMock.enableMocks();
+
+    const setState = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const useStateMock: any = (initState: any) => [initState, setState];
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
     beforeEach(() => {
-        component = shallow(<Schedules />);
+        // setup a DOM element as a render target
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        // Mock fetch
         fetchMock.doMock();
     });
 
-    test('Should mount component', () => {
-        expect(component).toMatchSnapshot();
-        expect(component.length).toBe(1);
+    afterEach(() => {
+        // cleanup on exiting
+        unmountComponentAtNode(container);
+        container.remove();
+        container = null;
+        fetchMock.mockRestore();
     });
 
-    test('should call API and returns data to me', async () => {
-        const container = document.createElement('div');
-        document.body.appendChild(container);
+    it('renders schedule list correctly', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify(schedules));
 
-        const testData = schedules;
-        const response = new Response();
-        jest.spyOn(global, 'fetch').mockImplementation(() =>
-            Promise.resolve(response),
+        const {getByTestId} = render(<Schedules />);
+
+        const listNode = await waitFor(() => getByTestId('schedules-list'));
+        expect(listNode.children).toHaveLength(
+            TestsMockHelper.getSchedules().length,
         );
+    });
 
-        await act(async () => {
-            render(<Schedules />, container);
-        });
+    it('renders loading', () => {
+        jest.spyOn(React, 'useState').mockImplementation(useStateMock);
+        const wrapper = shallow(<Schedules />);
 
-        expect(container).toBeDefined();
+        setState();
 
-        global.fetch.mockRestore();
+        expect(setState).toHaveBeenCalledTimes(1);
     });
 });
