@@ -1,4 +1,6 @@
 import {ISchedule} from '../da/schedule.interface';
+import {ILog} from '../da/logs.interface';
+import {Status} from '../da/status.enum';
 
 export class TestsMockHelper {
     static getSchedules(): ISchedule[] {
@@ -37,5 +39,30 @@ export class TestsMockHelper {
 
     static getSchedule(): ISchedule {
         return this.getSchedules()[0];
+    }
+
+    static getLogs(): ILog[] {
+        return [
+            {
+                id: 74130264,
+                startTime: '2021-04-25T02:05:14.437Z',
+                endTime: '2021-05-08T08:19:25.400Z',
+                status: Status.Running,
+                serverName: 'anim enim in id',
+                scheduleId: 76728855,
+            },
+            {
+                id: 46759301,
+                startTime: '2021-06-03T10:39:40.111Z',
+                endTime: '2021-06-07T03:09:15.518Z',
+                status: Status.Completed,
+                serverName: 'id velit adipisicing in',
+                scheduleId: 76728855,
+            },
+        ];
+    }
+
+    static getLog(): ILog {
+        return this.getLogs()[0];
     }
 }

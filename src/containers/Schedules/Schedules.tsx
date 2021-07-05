@@ -20,7 +20,7 @@ const Schedules: React.FC = () => {
         setEditing(false);
     };
 
-    const removeItem = (id: number, removedItem: ISchedule) => {
+    const removeItem = (id: number) => {
         setRemoving(true);
 
         setItems(items.filter((item) => item.id !== id));
@@ -28,6 +28,18 @@ const Schedules: React.FC = () => {
     };
 
     const selectItem = (schedule: ISchedule) => {
+        setItems(
+            items.map((item) =>
+                item.id === schedule.id
+                    ? {...item, selected: true}
+                    : {...item, selected: false},
+            ),
+        );
+
+        getLogs(schedule);
+    };
+
+    const getLogs = (schedule: ISchedule) => {
         fetch(`${CONFIG.URL.SCHEDULE_LOGS}?scheduleId=${schedule.id}`)
             ?.then((res) => {
                 return res.json();

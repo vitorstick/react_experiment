@@ -6,7 +6,7 @@ interface Props {
     schedule: ISchedule;
     onScheduleRetire?: (id: number, updatedUser: ISchedule) => void;
     onSelectSchedule?: (schedule: ISchedule) => void;
-    onRemoveSchedule?: (id: number, updatedUser: ISchedule) => void;
+    onRemoveSchedule?: (id: number) => void;
 }
 
 const ScheduleItem: React.FC<Props> = (props) => {
@@ -19,11 +19,14 @@ const ScheduleItem: React.FC<Props> = (props) => {
     };
 
     const removeItem = (schedule: ISchedule): void => {
-        console.log('remove item :: ');
-        props.onRemoveSchedule(schedule.id, schedule);
+        props.onRemoveSchedule(schedule.id);
     };
 
     const selectItem = (schedule: ISchedule): void => {
+        schedule = {
+            ...schedule,
+            selected: true,
+        };
         props.onSelectSchedule(schedule);
     };
 

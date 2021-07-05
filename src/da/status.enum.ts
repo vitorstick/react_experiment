@@ -3,4 +3,5 @@ export enum Status {
     Exception = 'Exception',
     Pending = 'Pending',
     Completed = 'Completed',
+    Terminated = 'Terminated',
 }

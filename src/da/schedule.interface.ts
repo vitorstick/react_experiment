@@ -12,4 +12,5 @@ export interface ISchedule {
     startPoint: string;
     tasksCount: number;
     timePeriod: number;
+    selected?: boolean;
 }
