@@ -1,9 +1,10 @@
-import React, {useState as useStateMock} from 'react';
+import React from 'react';
 import fetchMock from 'jest-fetch-mock';
-import {shallow} from 'enzyme';
+
 import Schedules from './Schedules';
 import {unmountComponentAtNode} from 'react-dom';
 import {waitFor, render} from '@testing-library/react';
+import {shallow} from 'enzyme';
 import {TestsMockHelper} from '../../tests_helper/tests_helper';
 import {ISchedule} from '../../da/schedule.interface';
 
@@ -47,12 +48,23 @@ describe('<Schedules />', () => {
         );
     });
 
-    it('renders loading', () => {
+    it('renders schedule item correctly', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify(schedules));
+
+        const {getAllByTestId} = render(<Schedules />);
+
+        const listNode = await waitFor(() => getAllByTestId('schedules-item'));
+        const children = listNode[0].children;
+        expect(children).toHaveLength(1);
+    });
+
+    it('uses set state', () => {
         jest.spyOn(React, 'useState').mockImplementation(useStateMock);
-        const wrapper = shallow(<Schedules />);
+        const container = shallow(<Schedules />);
 
         setState();
 
+        expect(container).toBeDefined();
         expect(setState).toHaveBeenCalledTimes(1);
     });
 });

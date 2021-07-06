@@ -25,6 +25,8 @@ const Schedules: React.FC = () => {
 
         setItems(items.filter((item) => item.id !== id));
         setRemoving(false);
+
+        clearLogs();
     };
 
     const selectItem = (schedule: ISchedule) => {
@@ -46,7 +48,6 @@ const Schedules: React.FC = () => {
             })
             ?.then(
                 (result: ISchedule[]) => {
-                    // console.log('logs :: ', result);
                     setLogs(result);
                 },
                 (error) => {
@@ -56,6 +57,10 @@ const Schedules: React.FC = () => {
             ?.finally(() => setIsLoading(false));
     };
 
+    const clearLogs = () => {
+        setLogs([]);
+    };
+
     useEffect(() => {
         fetch(`${CONFIG.URL.SCHEDULES}`)
             ?.then((res) => {
@@ -63,16 +68,13 @@ const Schedules: React.FC = () => {
             })
             ?.then(
                 (result: ISchedule[]) => {
-                    // console.log('items :: ', result);
                     setItems(result);
                 },
                 (error) => {
-                    // console.log('error :: ', error);
                     setError(error);
                 },
             )
             ?.finally(() => {
-                // console.log('setIsLoading ');
                 setIsLoading(false);
             });
     }, []);

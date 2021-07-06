@@ -29,7 +29,7 @@ const Schedule: React.FC<Props> = (props) => {
     };
 
     return (
-        <div
+        <article
             className={`schedule-detail ${
                 schedule?.selected ? 'schedule-detail--selected' : ''
             }`}
@@ -63,7 +63,7 @@ const Schedule: React.FC<Props> = (props) => {
                     Retire
                 </button>
             </div>
-        </div>
+        </article>
     );
 };
 

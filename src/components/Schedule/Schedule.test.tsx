@@ -72,4 +72,17 @@ describe('<Schedule />', () => {
 
         expect(props.onSelectSchedule).toHaveBeenCalled();
     });
+
+    it('should have select class if schedule have selected as true', () => {
+        const selectedSchedule: ISchedule = {
+            ...TestsMockHelper.getSchedule(),
+            selected: true,
+        };
+        const {container} = render(<Schedule schedule={selectedSchedule} />);
+
+        expect(
+            container.getElementsByClassName('schedule-detail--selected')
+                .length,
+        ).toBe(1);
+    });
 });
