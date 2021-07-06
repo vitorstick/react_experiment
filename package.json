@@ -8,7 +8,9 @@
         "build": "webpack --mode=production --env production --progress",
         "lint": "eslint src/**/*.{ts,tsx} --quiet --fix",
         "test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "devDependencies": {
         "@testing-library/react": "^12.0.0",
@@ -27,6 +29,7 @@
         "eslint-plugin-react": "^7.22.0",
         "eslint-plugin-react-hooks": "^4.2.0",
         "fork-ts-checker-webpack-plugin": "^6.1.1",
+        "gh-pages": "^3.2.3",
         "html-webpack-plugin": "^5.3.1",
         "jest-fetch-mock": "^3.0.3",
         "jsdom": "16.6.0",

@@ -1,6 +1,6 @@
 export const CONFIG = {
     URL: {
-        SCHEDULES: 'http://localhost:3000/schedules',
-        SCHEDULE_LOGS: 'http://localhost:3000/scheduleLogs',
+        SCHEDULES: 'https://fake-schedules-api.herokuapp.com/schedules',
+        SCHEDULE_LOGS: 'https://fake-schedules-api.herokuapp.com/scheduleLogs',
     },
 };
